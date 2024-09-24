@@ -3,11 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package tp3.ejer6;
+package tp3.Ejercicio6;
 
 /**
  *
- * @author juan.barrera
+ * @author juanc
  */
 public class Numeros {
 
@@ -22,6 +22,9 @@ public class Numeros {
         this.longitudTotal = n.length;
         this.sumaTotal = 0;
 
+        //this.longitudTotal / por la cant. de hilos
+        this.longitudTotal = longitudTotal / 10;
+
     }
 
     // arreglo de 50 mil y 10 hilos, cada hilo suma 5 mil posiciones
@@ -30,22 +33,26 @@ public class Numeros {
         return this.sumaTotal;
     }
 
-    public int sumaLocal(int indiceDeHilo, int nombreHilo, int ultimaPosicion) {
+    public synchronized int asignacionPorHilo() {
+        ultimaPosicion = ultimaPosicion + longitudTotal;
+        return ultimaPosicion;
+    }
+
+    public int sumaLocal(int indiceDeHilo, int nombreHilo, int indiceFinal) {
         //devuelve el indice del hilo ejecutor
-        int posAux = 0;
-        int sumaAux = 0;
 
         int total = 0;
-        while (posAux <= indiceDeHilo) {
-          
-            total = total + numeros[posAux];
-            posAux++;
+        indiceDeHilo = indiceFinal - longitudTotal;
+        for (int i = indiceDeHilo; i < indiceFinal; i++) {
+
+            total = total + numeros[i];
+            //System.out.println("mis valores " + this.numeros[i]);
         }
-        System.out.println(nombreHilo + " sumo =>  " +    this.sumaTotal +" en posicion "+indiceDeHilo);
+        System.out.println("Soy hilo " + nombreHilo + " indice " + indiceDeHilo + " mi total " + total);
         return total;
     }
-    
-    public synchronized void sumar(int valor) { 
+
+    public synchronized void sumar(int valor) {
         this.sumaTotal = this.sumaTotal + valor;
     }
 }

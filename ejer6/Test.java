@@ -3,15 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package tp3.ejer6;
+package tp3.Ejercicio6;
 
 /**
  *
- * @author juan.barrera
+ * @author juanc
  */
 public class Test {
-
-    public static void main(String[] args) throws InterruptedException {
+      public static void main(String[] args) throws InterruptedException {
 
         int[] numerosArray = new int[50000];
         int longitudNumeros = numerosArray.length;
@@ -19,15 +18,18 @@ public class Test {
         for (int i = 0; i < longitudNumeros; i++) {
             int num = util.numrosAleatorios();
             numerosArray[i] = num;
+            System.out.println("num "+num);
             testSumaTotal = testSumaTotal + num;
 
         }
-        System.out.println("El resultado correcto es " + testSumaTotal);
+        
+        System.out.println("TEST => El resultado correcto es " + testSumaTotal);
         Numeros numeros = new Numeros(numerosArray);
         //(int posicion, Numeros n, String nombreHilo)
         Sumadora[] arraysSumadora = new Sumadora[10];
       
         int postAsignacion = longitudNumeros / arraysSumadora.length;
+        
           System.out.println("devision "+postAsignacion);
         //10 hilos
         for (int i = 0; i < arraysSumadora.length; i++) {
@@ -49,5 +51,4 @@ public class Test {
         System.out.println("suma total " + numeros.resultadoTotal());
 
     }
-
 }

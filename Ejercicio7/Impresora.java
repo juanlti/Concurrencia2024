@@ -28,10 +28,21 @@ public class Impresora extends Thread {
         while (yaImprimio.equals("")) {
 
             yaImprimio = this.dato.imprimir(cantidad, imprimir);
+            try {
+                Thread.sleep(200);
+            } catch (InterruptedException ex) {
+                Logger.getLogger(Impresora.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
         boolean cortar = false;
         while (!cortar) {
+
             cortar = this.dato.finalizarImpresion(turno, yaImprimio);
+            try {
+                Thread.sleep(200);
+            } catch (InterruptedException ex) {
+                Logger.getLogger(Impresora.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
 
     }

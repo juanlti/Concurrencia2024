@@ -3,8 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package tp4.Ejercicio3;
+package tp4.Ejer5;
 
+/**
+ *
+ * @author juan.barrera
+ */
 import java.util.concurrent.Semaphore;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -15,32 +19,34 @@ import java.util.logging.Logger;
  */
 public class Impresora {
 
-    Semaphore mutexA, mutexB;
+    Semaphore mutex;
+    String tipoImpresora;
+    int cantLimites;
 
-    public Impresora() {
-        mutexA = new Semaphore(1);
-        mutexB = new Semaphore(1);
-
-    }
-
-    public void impresoraDisponibleTipoA(char unC) {
-        try {
-            //toma el unico persmiso disponible
-            mutexA.acquire();
-
-        } catch (InterruptedException ex) {
-            Logger.getLogger(Impresora.class.getName()).log(Level.SEVERE, null, ex);
-        }
+    public Impresora(String tipoImpresora, int cantLimite) {
+        this.tipoImpresora = tipoImpresora;
+        this.cantLimites = cantLimite;
+        mutex = new Semaphore(1);
 
     }
 
-    public void impresoraDisponibleTipoB(char unC) {
+    public boolean impresoraDisponible(int cantImprimir, char tipoDocumento) {
         try {
-            //toma el unico persmiso disponible
-            mutexB.acquire();
+            // tomo el unico permiso disponible
+            this.mutex.acquire();
+            //verifico si hay cupo disponible
+            if (this.cantLimites >= cantImprimir) {
+                //sale cantImprimir
 
-            //consulta el tipo de impresion
-            switch (unC) {
+                //tiene cupo y imprime
+                this.cantLimites = cantLimites - cantImprimir;
+
+                System.out.println("Impresora " + tipoImpresora + " tipoDocumento  " + tipoImpresora + " cantidad a imprimir  " + cantImprimir + " cant disponible proxima  " + this.cantLimites);
+                //Thread.sleep(util.numrosAleatorios());
+                this.mutex.release();
+                return true;
+
+            } else {
 
             }
 
@@ -48,6 +54,15 @@ public class Impresora {
             Logger.getLogger(Impresora.class.getName()).log(Level.SEVERE, null, ex);
         }
 
+        System.out.println("No debe estrar con " + this.cantLimites);
+        this.mutex.release();
+        return false;
+
+    }
+
+    public void cupoDisponible() {
+
+        System.out.println("Cupo disponible debe ser 0 == " + this.cantLimites);
     }
 
 }

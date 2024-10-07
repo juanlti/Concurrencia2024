@@ -18,12 +18,12 @@ import java.util.logging.Logger;
  */
 public class Impresion {
 
-    char tipoImpresora;
+    String tipoImpresora;
     int cantLimites;
     boolean ingresarA = true;
     boolean ingresarB = true;
 
-    public Impresion(char tipoImpresora, int cantLimite) {
+    public Impresion(String tipoImpresora, int cantLimite) {
         this.tipoImpresora = tipoImpresora;
         this.cantLimites = cantLimite;
 
@@ -33,31 +33,17 @@ public class Impresion {
         return this.cantLimites;
     }
 
-    public void impresoraA(int cantImprimir) {
+    public void impresora(int cantImprimir, String docu, int id) {
 
         try {
             //tiene cupo y imprime
             this.cantLimites = cantLimites - cantImprimir;
 
-            System.out.println("Impresora A " + tipoImpresora + " tipoDocumento  " + tipoImpresora + " cantidad a imprimir  " + cantImprimir + " cant disponible proxima  " + this.cantLimites);
+            System.out.println("id " + id + " Impresora " + tipoImpresora + " IMPRIMIENDO tipoDocumento  " + docu + " cantidad a imprimir  " + cantImprimir + " cant disponible proxima  " + this.cantLimites);
             Thread.sleep(200);
         } catch (InterruptedException ex) {
             Logger.getLogger(Impresion.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }
-
-    public void impresoraB(int cantImprimir) {
-
-        try {
-            //tiene cupo y imprime
-            this.cantLimites = cantLimites - cantImprimir;
-
-            System.out.println("Impresora B " + tipoImpresora + " tipoDocumento  " + tipoImpresora + " cantidad a imprimir  " + cantImprimir + " cant disponible proxima  " + this.cantLimites);
-            Thread.sleep(200);
-        } catch (InterruptedException ex) {
-            Logger.getLogger(Impresion.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
     }
 
 }

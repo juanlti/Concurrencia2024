@@ -38,8 +38,9 @@ public class Visitante extends Thread {
             } else {
                 try {
                     // queda esperando para volver a intentarlo (no pudo ingresar)
-                    Thread.sleep(200);
                     System.out.println("Vuelve a intentarlo");
+                    Thread.sleep(500);
+
                 } catch (InterruptedException ex) {
                     Logger.getLogger(Visitante.class.getName()).log(Level.SEVERE, null, ex);
                 } finally {

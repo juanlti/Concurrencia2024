@@ -26,7 +26,6 @@ public class Rotar extends Thread {
         boolean comenzar = false;
 
         while (!comenzar) {
-          //  System.out.println("sigo aca");
             comenzar = this.plato.puedoComenzar();
             try {
                 Thread.sleep(200);
@@ -36,16 +35,12 @@ public class Rotar extends Thread {
 
         }
 
-      //  System.out.println("salirrrrr " + comenzar);
         while (seguirPerros || seguirGatos) {
-            
+
             seguirPerros = this.plato.getCantidadPerros();
-               // System.out.println("PERROSSS  " + seguirPerros);
 
             if (seguirPerros) {
-                //System.out.println("dentro perros " + seguirPerros);
                 this.plato.despiertaPerros();
-               // this.plato.esperar("salio perros");
 
             }
             try {
@@ -58,14 +53,8 @@ public class Rotar extends Thread {
             if (seguirGatos) {
 
                 this.plato.despiertaGatos();
-                //System.out.println("dentro gatos  " + seguirGatos);
-               // this.plato.esperar("salio gatos");
             }
-            //System.out.println("GATOOOSSSS  " + seguirGatos);
 
         }
-        
-       // System.out.println("termino    ?");
-
     }
 }

@@ -60,12 +60,10 @@ public class Plato {
         if (cantiadTotalPerros - perrosRotar >= 0) {
             // tengo al menos 5 perros
             this.cantiadTotalPerros = this.cantiadTotalPerros - perrosRotar;
-            //   System.out.println("grupo de perros" + this.perrosRotar);
             mutexPerroSaliendo.release(perrosRotar);
             mutexPerroUltimo.release();
 
         } else {
-            // System.out.println("ultimos grupo de perros " + this.perrosRotar);
             mutexPerroSaliendo.release(cantiadTotalPerros);
             mutexPerroUltimo.release();
             // cantiadTotalPerros = 0;
@@ -75,9 +73,7 @@ public class Plato {
 
     public void esperar(String tipo) {
         try {
-            // System.out.println("estoy esperando " + tipo);
             this.mutex.acquire();
-            //  System.out.println("sigo");
         } catch (InterruptedException ex) {
             Logger.getLogger(Plato.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -89,11 +85,9 @@ public class Plato {
             // tengo al menos 3 gatos
             this.cantiadTotalGatos = this.cantiadTotalGatos - gatosRotar;
             mutexGatoSaliendo.release(gatosRotar);
-            //System.out.println("grupo de gatos " + this.gatosRotar);
             mutexGatoSaliendo.release();
 
         } else {
-            //System.out.println(" ultimos grupo de gatos " + this.gatosRotar);
             mutexGatoSaliendo.release(cantiadTotalGatos);
             mutexGatoSaliendo.release();
             // cantiadTotalGatos = 0;
@@ -109,10 +103,8 @@ public class Plato {
         }
 
         try {
-            //System.out.println("perros");
             cantiadTotalPerros++;
             mutexPerro.release();
-            // deben esperar, salen en grupo
             mutexPerroSaliendo.acquire();
 
         } catch (InterruptedException ex) {
@@ -129,9 +121,7 @@ public class Plato {
 
         try {
             this.cantiadTotalGatos++;
-            //System.out.println("gatos");
             mutexGato.release();
-            // deben esperar, salen en grupo
             this.mutexGatoSaliendo.acquire();
 
         } catch (InterruptedException ex) {
@@ -157,12 +147,9 @@ public class Plato {
         } catch (InterruptedException ex) {
             Logger.getLogger(Plato.class.getName()).log(Level.SEVERE, null, ex);
         }
-        //this.mutex.release();
         if (auxPerros == this.perrosRotar) {
-            //  System.out.println(auxPerros + " Perros saliendo " + nombre + " todos " + this.perrosRotar);
             auxPerros = 0;
             this.mutex.release();
-            //  System.out.println("total perros " + this.cantiadTotalPerros);
 
         }
         mutexPerroUltimo.release();
@@ -176,10 +163,6 @@ public class Plato {
             Logger.getLogger(Plato.class.getName()).log(Level.SEVERE, null, ex);
         }
         auxGatos++;
-        //this.mutex.release();
-        // System.out.println(auxGatos + " Gatos saliendo " + nombre + " todos " + this.gatosRotar);
-        //System.out.println("total gatos " + this.cantiadTotalGatos);
-        //this.mutex.release();
         if (auxGatos == gatosRotar) {
 
             gatosRotar = 0;

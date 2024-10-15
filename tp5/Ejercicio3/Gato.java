@@ -26,7 +26,6 @@ public class Gato extends Thread {
         this.plato.ingresanGatos();
         this.plato.comiendo(nombreGato, " Gato ");
         this.plato.saliendoGatos(nombreGato);
-        //System.out.println("gato fin " + nombreGato);
     }
 
 }

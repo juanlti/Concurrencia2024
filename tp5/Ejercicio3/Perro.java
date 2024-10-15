@@ -26,7 +26,5 @@ public class Perro extends Thread {
         this.plato.ingresanPerros();
         this.plato.comiendo(nombrePerro, " Perro ");
         this.plato.saliendoPerros(nombrePerro);
-        //System.out.println("perro fin " + nombrePerro);
-
     }
 }

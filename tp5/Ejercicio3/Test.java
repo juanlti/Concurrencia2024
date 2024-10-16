@@ -13,7 +13,7 @@ public class Test {
 
     public static void main(String[] args) throws InterruptedException {
 
-        Plato plato = new Plato(50, 5, 10);
+        Plato plato = new Plato(50, 3, 10);
         Rotar rotar = new Rotar(plato);
 
         Perro[] perros = new Perro[30];

@@ -40,8 +40,9 @@ public class Rotar extends Thread {
             seguirPerros = this.plato.getCantidadPerros();
 
             if (seguirPerros) {
-                this.plato.despiertaPerros();
 
+                this.plato.despiertaPerros();
+                this.plato.esperar();
             }
             try {
                 Thread.sleep(200);
@@ -53,8 +54,14 @@ public class Rotar extends Thread {
             if (seguirGatos) {
 
                 this.plato.despiertaGatos();
+                this.plato.esperar();
+                // System.out.println(" EN ESPERA GATOS");
+                //  this.plato.esperar();
+                //System.out.println("GATOS FUERA");
             }
 
         }
+
+       System.out.println("sali ");
     }
 }

@@ -55,13 +55,10 @@ public class Rotar extends Thread {
 
                 this.plato.despiertaGatos();
                 this.plato.esperar();
-                // System.out.println(" EN ESPERA GATOS");
-                //  this.plato.esperar();
-                //System.out.println("GATOS FUERA");
             }
 
         }
 
-       System.out.println("sali ");
+        System.out.println("sali ");
     }
 }

@@ -41,7 +41,7 @@ public class Plato {
     }
 
     public boolean puedoComenzar() {
-        System.out.println("puedo seguir " + cantiadTotalPerros + cantiadTotalGatos);
+        //System.out.println("puedo seguir hilo rotador" + cantiadTotalPerros + cantiadTotalGatos);
 
         return cantiadTotalPerros + cantiadTotalGatos == this.cantPlatos;
 
@@ -66,12 +66,12 @@ public class Plato {
         } else {
             mutexPerroSaliendo.release(cantiadTotalPerros);
             mutexPerroUltimo.release();
-            // cantiadTotalPerros = 0;
+            cantiadTotalPerros = 0;
 
         }
     }
 
-    public void esperar(String tipo) {
+    public void esperar() {
         try {
             this.mutex.acquire();
         } catch (InterruptedException ex) {
@@ -85,19 +85,21 @@ public class Plato {
             // tengo al menos 3 gatos
             this.cantiadTotalGatos = this.cantiadTotalGatos - gatosRotar;
             mutexGatoSaliendo.release(gatosRotar);
-            mutexGatoSaliendo.release();
+            mutexGatoUltimo.release();
 
         } else {
             mutexGatoSaliendo.release(cantiadTotalGatos);
-            mutexGatoSaliendo.release();
-            // cantiadTotalGatos = 0;
+            mutexGatoUltimo.release();
+            cantiadTotalGatos = 0;
 
         }
     }
 
     public void ingresanPerros() {
         try {
+
             mutexPerro.acquire();
+            System.out.println("Ingresan perros");
         } catch (InterruptedException ex) {
             Logger.getLogger(Plato.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -114,7 +116,9 @@ public class Plato {
 
     public void ingresanGatos() {
         try {
+
             this.mutexGato.acquire();
+            System.out.println("Ingresan gatos");
         } catch (InterruptedException ex) {
             Logger.getLogger(Plato.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -131,8 +135,8 @@ public class Plato {
 
     public void comiendo(int nombre, String tipoAnimal) {
 
+        System.out.println("animal " + nombre + " tipo animal comiendo " + tipoAnimal);
         try {
-            System.out.println("animal " + nombre + " tipo animal comiendo " + tipoAnimal);
             Thread.sleep(200);
         } catch (InterruptedException ex) {
             Logger.getLogger(Plato.class.getName()).log(Level.SEVERE, null, ex);
@@ -151,25 +155,30 @@ public class Plato {
             auxPerros = 0;
             this.mutex.release();
 
+            // System.out.println("ultima de la tanda perro ");
         }
+        System.out.println("Perro saliendo " + nombre);
         mutexPerroUltimo.release();
 
     }
 
     public void saliendoGatos(int nombre) {
         try {
-            this.mutexGatoSaliendo.acquire();
+            this.mutexGatoUltimo.acquire();
         } catch (InterruptedException ex) {
             Logger.getLogger(Plato.class.getName()).log(Level.SEVERE, null, ex);
         }
         auxGatos++;
+        //  System.out.println("auxGatos " + auxGatos + "rotacion  " + gatosRotar);
         if (auxGatos == gatosRotar) {
 
-            gatosRotar = 0;
+            auxGatos = 0;
             this.mutex.release();
+            //   System.out.println("ultima de la tanda gatos  ");
 
         }
-        this.mutexGatoSaliendo.release();
+        System.out.println("Gato saliendo " + nombre);
+        this.mutexGatoUltimo.release();
 
     }
 

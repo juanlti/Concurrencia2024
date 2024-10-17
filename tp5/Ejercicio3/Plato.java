@@ -15,8 +15,7 @@ import java.util.logging.Logger;
  */
 public class Plato {
 
-    Plato[] comedores;
-
+  
     int cantPlatos, noHayNadie, cantiadTotalPerros, cantiadTotalGatos;
     Semaphore mutexPerroUltimo, mutexGatoUltimo, mutex, mutexGato, mutexPerro, mutexPerroSaliendo, mutexGatoSaliendo;
     int perrosRotar, gatosRotar, auxPerros, auxGatos;

@@ -54,6 +54,15 @@ public class Plato {
     public boolean getCantidadGatos() {
         return cantiadTotalGatos > 0;
     }
+      public void esperar() {
+        try {
+            this.mutex.acquire();
+        } catch (InterruptedException ex) {
+            Logger.getLogger(Plato.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+
 
     public void despiertaPerros() {
         if (cantiadTotalPerros - perrosRotar >= 0) {
@@ -70,15 +79,7 @@ public class Plato {
         }
     }
 
-    public void esperar() {
-        try {
-            this.mutex.acquire();
-        } catch (InterruptedException ex) {
-            Logger.getLogger(Plato.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
 
-    //gatosRotar
     public void despiertaGatos() {
         if (cantiadTotalGatos - gatosRotar >= 0) {
             // tengo al menos 3 gatos

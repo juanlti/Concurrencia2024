@@ -33,11 +33,9 @@ public class Mirador {
     public int ingresar(int nombre) {
         try {
             //todos las personas
-
             visitantes++;
             System.out.println("Ingreso el cliente  " + nombre);
             todasLasPersonas.acquire();
-            //System.out.println("nuevo valor " + this.lugarDisponible);
         } catch (InterruptedException ex) {
             Logger.getLogger(Mirador.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -62,7 +60,7 @@ public class Mirador {
             this.visitantes--;
             this.tobogan2Libre = false;
             this.lugarDisponible = 2;
-            todasLasPersonas.release();
+           todasLasPersonas.release();
 
         }
     }
@@ -70,11 +68,6 @@ public class Mirador {
     public boolean hayGente() {
         return this.visitantes > 0;
     }
-
-    public void despertarEncargado() {
-
-    }
-
     public void tobogan1() {
         try {
 
@@ -95,5 +88,4 @@ public class Mirador {
         }
         this.tobogan2Libre = true;
     }
-
 }

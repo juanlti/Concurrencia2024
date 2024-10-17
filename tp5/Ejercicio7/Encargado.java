@@ -28,7 +28,6 @@ public class Encargado extends Thread {
                 this.mirador.verificarDisponibilidadT1();
                       Thread.sleep(100);
                 this.mirador.verificarDisponibilidadT2();
-               // Thread.sleep(100);
             } catch (InterruptedException ex) {
                 Logger.getLogger(Encargado.class.getName()).log(Level.SEVERE, null, ex);
             }

@@ -9,6 +9,20 @@ package tp7.Ejercicio1;
  *
  * @author juanc
  */
-public class CochesSur {
-    
+public class CocheSur extends Thread {
+
+    Puente puente;
+
+    public CocheSur(Puente puente) {
+        this.puente = puente;
+    }
+
+    public void run() {
+
+        this.puente.puenteDisponible('S');
+        this.puente.entrarCocheSur();
+        this.puente.salirCocheSur();
+
+    }
+
 }

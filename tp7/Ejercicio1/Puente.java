@@ -12,41 +12,41 @@ package tp7.Ejercicio1;
 public class Puente {
 
     boolean puenteDisponible;
-    Semaphore pasar, esperando, norte, sur;
+    Semaphore pasar, norte, sur;
     char ultimos;
-    int cochesEsperandoLadoContrario, enCirculacion, cantSur, cantNorte;
+    int cantSur, cantNorte;
 
     public Puente() {
         puenteDisponible = true;
         pasar = new Semaphore(1);
-        esperando = new Semaphore(0);
+
         ultimos = '@';
-        cochesEsperandoLadoContrario = 0;
+
         norte = new Semaphore(0);
         sur = new Semaphore(0);
-        enCirculacion = 0;
+
         cantSur = 0;
         cantNorte = 0;
 
     }
 
-    public void puenteDisponible(char dirrecion) {
+    public void puenteDisponible(char direccion) {
         try {
             this.pasar.acquire();
             if (puenteDisponible) {
                 puenteDisponible = false;
-                this.ultimos = dirrecion;
+                this.ultimos = direccion;
                 if (this.ultimos == 'S') {
                     sur.release();
                 } else {
                     norte.release();
                 }
             }
-            if (dirrecion == 'S') {
+            if (direccion == 'S') {
 
                 cantSur++;
             }
-            if (dirrecion == 'N') {
+            if (direccion == 'N') {
                 cantNorte++;
 
             }
@@ -108,3 +108,4 @@ public class Puente {
     }
 
 }
+

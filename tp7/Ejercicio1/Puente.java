@@ -12,13 +12,13 @@ package tp7.Ejercicio1;
 public class Puente {
 
     boolean puenteDisponible;
-    Semaphore pasar, norte, sur;
+    Semaphore mutex, norte, sur;
     char turnoActual;
     int cantSur, cantNorte;
 
     public Puente() {
         puenteDisponible = true;
-        pasar = new Semaphore(1);
+        mutex = new Semaphore(1);
         turnoActual = '@';
         norte = new Semaphore(0);
         sur = new Semaphore(0);
@@ -29,7 +29,7 @@ public class Puente {
 
     public void puenteDisponible(char direccion) {
         try {
-            this.pasar.acquire();
+            this.mutex.acquire();
             if (puenteDisponible) {
                 puenteDisponible = false;
                 this.turnoActual = direccion;
@@ -48,7 +48,7 @@ public class Puente {
 
             }
 
-            this.pasar.release();
+            this.mutex.release();
 
         } catch (InterruptedException ex) {
             Logger.getLogger(Puente.class.getName()).log(Level.SEVERE, null, ex);
@@ -105,4 +105,3 @@ public class Puente {
     }
 
 }
-

@@ -13,18 +13,15 @@ public class Puente {
 
     boolean puenteDisponible;
     Semaphore pasar, norte, sur;
-    char ultimos;
+    char turnoActual;
     int cantSur, cantNorte;
 
     public Puente() {
         puenteDisponible = true;
         pasar = new Semaphore(1);
-
-        ultimos = '@';
-
+        turnoActual = '@';
         norte = new Semaphore(0);
         sur = new Semaphore(0);
-
         cantSur = 0;
         cantNorte = 0;
 
@@ -35,8 +32,8 @@ public class Puente {
             this.pasar.acquire();
             if (puenteDisponible) {
                 puenteDisponible = false;
-                this.ultimos = direccion;
-                if (this.ultimos == 'S') {
+                this.turnoActual = direccion;
+                if (this.turnoActual == 'S') {
                     sur.release();
                 } else {
                     norte.release();
